@@ -1,0 +1,115 @@
+% Informative Videos
+
+@misc{starmer2018svm1,
+  author       = {Starmer, Josh},
+  title        = {Support Vector Machines Part 1 (of 3): Main Ideas!!!},
+  year         = {2018},
+  howpublished = {YouTube},
+  note         = {StatQuest with Josh Starmer},
+  url          = {https://www.youtube.com/watch?v=efR1C6CvhmE},
+  urldate      = {2026-02-09},
+  annotation   = {Three part series giving a introduction to the statistics behind Support Vector Machines (SVM)}
+}
+
+@misc{starmer2018svm2,
+  author       = {Starmer, Josh},
+  title        = {Support Vector Machines Part 2: The Polynomial Kernel},
+  year         = {2018},
+  howpublished = {YouTube},
+  note         = {StatQuest with Josh Starmer},
+  url          = {https://www.youtube.com/watch?v=Toet3EiSFcM},
+  urldate      = {2026-02-09},
+  annotation   = {Three part series giving a introduction to the statistics behind Support Vector Machines (SVM)}
+}
+
+@misc{starmer2018svm3,
+  author       = {Starmer, Josh},
+  title        = {Support Vector Machines Part 3: The Radial ({RBF}) Kernel},
+  year         = {2018},
+  howpublished = {YouTube},
+  note         = {StatQuest with Josh Starmer},
+  url          = {https://www.youtube.com/watch?v=Qc5IyLW_hns},
+  urldate      = {2026-02-09},
+  annotation   = {Three part series giving a introduction to the statistics behind Support Vector Machines (SVM)}
+}
+
+@misc{starmer2017pca,
+  author       = {Starmer, Josh},
+  title        = {StatQuest: Principal Component Analysis ({PCA}), Step-by-Step},
+  year         = {2017},
+  howpublished = {YouTube},
+  note         = {StatQuest with Josh Starmer},
+  url          = {https://www.youtube.com/watch?v=FgakZw6K1QQ},
+  urldate      = {2026-02-09},
+  annotation   = {Introduction to the statistics behind Principal Component Analysis (PCA)}
+}
+
+
+
+% Example code`
+
+@misc{geeksforgeeks_svm,
+  author       = {{GeeksforGeeks}},
+  title        = {Support Vector Machine ({SVM}) Algorithm},
+  year         = {2026},
+  url          = {https://www.geeksforgeeks.org/machine-learning/support-vector-machine-algorithm/},
+  note         = {Accessed: 2026-02-09},
+  annotation   = {This article provides an accessible overview of SVM for classification and regression, explaining hyperplanes, margin maximization, and the kernel trick with code examples in Python using scikit-learn.
+  
+  This source will provide starter code for setting up the SVMs in python}
+}
+
+@misc{geeksforgeeks_pca,
+  author       = {{GeeksforGeeks}},
+  title        = {Principal Component Analysis ({PCA})},
+  year         = {2025},
+  url          = {https://www.geeksforgeeks.org/data-analysis/principal-component-analysis-pca/},
+  note         = {Accessed: 2026-02-09},
+  annotation   = {This article explains PCA as a dimensionality reduction technique that transforms correlated features into uncorrelated principal components, with Python implementation examples using scikit-learn.
+  
+  This source will provide starter code for PCA and text preprocessing}
+}
+
+
+
+% Informative Sources
+
+@article{shlens2014tutorial,
+  author    = {Shlens, Jonathon},
+  title     = {A Tutorial on Principal Component Analysis},
+  journal   = {arXiv preprint arXiv:1404.1100},
+  year      = {2014},
+  note      = {Available at \url{https://arxiv.org/abs/1404.1100}},
+  annotation = {PCA is a mainstay of modern data analysis but often poorly understood. This tutorial teaches the mathematical foundations of PCA, to dispel the "magic behind the black box". Shlens covers both the informal ideas and the formal mathematics behind PCA.
+  
+  This is the main source for understanding how and why PCA works in my project. The step-by-step derivation from intuition to math is useful for the mathematical foundations section, and the discussion of when to apply PCA helps identify potential issues with text data.}
+}
+
+@misc{jakkula2011svm,
+  author       = {Jakkula, Vikramaditya},
+  title        = {Tutorial on Support Vector Machine ({SVM})},
+  year         = {2011},
+  institution  = {School of EECS, Washington State University},
+  url          = {https://course.ccs.neu.edu/cs5100f11/resources/jakkula.pdf},
+  note         = {Accessed: 2026-02-09},
+  annotation   = {This tutorial introduces SVM starting with statistical learning theory, then presents the mathematical formulation and implementation. SVMs use Structural Risk Minimization (SRM) rather than the Empirical Risk Minimization (ERM) used by neural networks---SRM minimizes an upper bound on expected risk rather than just training error, which gives SVMs better generalization.
+  
+  This source explains why SVMs work well on high-dimensional data, which is directly relevant to the text classification problem. The comparison to neural networks and the discussion of generalization connects to my project's question of whether PCA preprocessing helps or hurts SVM performance.}
+}
+
+
+
+
+% DATASET
+
+
+@misc{maas2011imdb,
+  author       = {Maas, Andrew L. and Daly, Raymond E. and Pham, Peter T. and Huang, Dan and Ng, Andrew Y. and Potts, Christopher},
+  title        = {{IMDB} Dataset of 50K Movie Reviews},
+  year         = {2011},
+  howpublished = {Kaggle},
+  note         = {Available at \url{https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews}. Originally published at \url{http://ai.stanford.edu/~amaas/data/sentiment/}},
+  annotation   = {This dataset contains 50,000 movie reviews from IMDB. Each review is labeled positive or negative, making it a standard benchmark for binary sentiment classification.
+  
+  This is the real-world application for my project. These are real movie reviews and we are tasked with aggregating that data and determinging movie sentment based on those comments. }
+}
