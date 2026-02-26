@@ -1,0 +1,52 @@
+%% Adapted from Mohammad Reza Saleh Sedghpour 
+
+\documentclass[runningheads]{llncs}
+\usepackage[margin=1.5in]{geometry}
+
+\begin{document}
+
+\title{Project Proposal}
+\author{Ellie Lagrave}
+\institute{Department of Mathematics and Statistics, University of North Carolina Asheville} 
+\maketitle
+
+\noindent\textbf{Project Topic}\\
+
+This paper examines how to work with high-dimensional data using a real-world example: 50,000 movie reviews from IMDB \cite{maas2011imdb}. The scenario is a movie listing company that wants to analyze the sentiment of fan reviews and produce an aggregated score for each movie. The challenge is dimensionality: when converting text to a bag-of-words representation (TF-IDF), each unique word becomes a feature. Common words like ``the,'' ``a,'' and ``is'' appear frequently but carry no sentiment information, yet they consume dimensions and can dominate variance. Rare words create sparse vectors where most entries are zero, making distance metrics less meaningful and models prone to overfitting. With tens of thousands of unique words, machine learning approaches become computationally expensive and statistically unreliable.
+
+Several packages handle sentiment analysis (NLTK, TextBlob, SpaCy) but the underlying statistical foundations vary. This paper focuses on two linear algebra techniques: \textit{Principal Component Analysis (PCA)} for dimensionality reduction and \textit{Support Vector Machines (SVM)} for classification. PCA simplifies data by projecting it onto the directions of maximum variance. SVM classifies data by finding the hyperplane that maximizes the margin between classes. The question is whether using PCA as a preprocessing step helps SVM by removing noise, or hurts it by discarding information needed for classification. We will also examine the processing speed tradeoffs of different approaches.
+
+PCA transforms high-dimensional data into a new coordinate system where axes (principal components) are ordered by variance captured. Projecting text data onto the first few components reduces thousands of dimensions to a manageable number. SVM then finds the hyperplane that best separates positive and negative reviews in this reduced space. This paper derives the math behind both techniques, implements the algorithms, and runs experiments comparing SVM accuracy on raw high-dimensional data versus PCA-reduced data. The result is a Python program demonstrating when dimensionality reduction helps and when it hurts.
+\hfill \break
+
+\medskip
+
+\noindent\textbf{Line of Inquiry}\\
+
+\medskip 
+\noindent 
+\textit{Central Question:} \\ \hfill \break
+Does PCA preprocessing improve SVM classification accuracy on text data by removing noise, or does it degrade accuracy by discarding information SVM needs?
+
+\medskip 
+\noindent 
+\textit{Secondary Questions:} 
+\begin{itemize}
+    \item \textbf{The Problem:} What makes high-dimensional text data difficult to work with? How do bag-of-words and TF-IDF create sparse, high-dimensional feature spaces?
+    \item \textbf{Mathematical Foundations (PCA):} What is a covariance matrix and how does it capture relationships between features? What are eigenvalues and eigenvectors, and what do they represent geometrically?
+    \item \textbf{Mathematical Foundations (SVM):} What is a hyperplane in high-dimensional space? How does SVM use Lagrange multipliers to find the maximum-margin boundary?
+    \item \textbf{The PCA Algorithm:} How does eigen decomposition identify principal components? How does singular value decomposition (SVD) provide a more efficient computation?
+    \item \textbf{Practical Considerations:} How many principal components should we keep? What is a scree plot and what does it reveal about information loss? What assumptions does PCA make, and when might they fail for text data?
+    \item \textbf{Experiments:} How does classification accuracy change as we vary the number of components retained? How does computational cost compare between raw and reduced data? Do positive and negative reviews visibly separate when projected to 2D or 3D?
+\end{itemize}
+
+\noindent\textbf{Annotated Bibliography}\\
+
+\medskip
+\noindent 
+See the References section below for annotated sources. The bibliography includes a peer-reviewed review of PCA (Jolliffe \& Cadima, 2016), a tutorial deriving PCA (Shlens, 2014), an SVM tutorial covering the mathematical formulation (Jakkula, 2011), the seminal SVM paper (Cortes \& Vapnik, 1995), a comparative review of dimensionality reduction techniques (van der Maaten et al., 2009), and the IMDB dataset (Maas et al., 2011).
+
+\nocite{*}
+\bibliographystyle{splncs04}
+\bibliography{references}
+\end{document}
