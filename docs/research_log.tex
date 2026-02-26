@@ -1,0 +1,57 @@
+%% Research log for PCA + SVM IMDB project
+
+\documentclass[runningheads]{llncs}
+\usepackage[margin=1.5in]{geometry}
+
+\begin{document}
+
+\title{Research Log: PCA and SVM for IMDB Sentiment Analysis}
+\author{Ellie Lagrave}
+\institute{Department of Mathematics and Statistics, University of North Carolina Asheville}
+\maketitle
+
+\section*{Central Question and Context}
+
+This project investigates how to work with high-dimensional text data using a real-world example: 50,000 movie reviews from IMDB \cite{maas2011imdb}. Reviews are converted to TF--IDF vectors, creating a high-dimensional, sparse feature space where many words are uninformative for sentiment but still consume variance and computational resources. The central question is whether applying Principal Component Analysis (PCA) as a preprocessing step helps a Support Vector Machine (SVM) classifier by removing noise, or hurts it by discarding information needed for accurate classification.
+
+The theoretical background follows Shlens' PCA tutorial \cite{shlens2014tutorial} and Jakkula's SVM tutorial \cite{jakkula2011svm}, supplemented by accessible explanations from StatQuest videos \cite{starmer2017pca, starmer2018svm1, starmer2018svm2, starmer2018svm3} and  example code from GeeksforGeeks \cite{geeksforgeeks_pca,geeksforgeeks_svm}.
+
+\section*{Research Log}
+
+\subsection*{Week 1--2: Code Development and Implementation}
+\begin{itemize}
+  \item Started with previous TF-IDF and tokenization pipeline I created for a seperate project, build the PCA and SVM systems on top of this pre-processing pipeline.
+  \item Used example code and implementation design from GeeksforGeeks on SVM and PCA \cite{geeksforgeeks_svm,geeksforgeeks_pca} as a starting point for the Python data processing pipeline, adapting them to the IMDB sentiment task.
+  \item Implemented the full data and model pipeline in code: loading IMDB with the HuggingFace \texttt{datasets} library, converting raw text to TF--IDF features with a configurable vocabulary size, and wiring a linear SVM classifier using \texttt{LinearSVC}.
+  \item Iteratively translated high-level ideas from the tutorials into concrete modules testing each stage on small subsets to debug data shapes, sparsity, and label handling.
+  \item Verified that the baseline SVM (no PCA) runs end-to-end on the full IMDB dataset, produces stable accuracy/F1 scores, and saves diagnostic plots (confusion matrix, decision-value distributions), providing a solid analysis of the SVM pipeline before introducing the PCA stages of the pipeline.
+\end{itemize}
+
+\subsection*{Week 3: Mathematical Foundations and Theory}
+\begin{itemize}
+  \item Deepened the mathematical understanding of PCA using Shlens' tutorial \cite{shlens2014tutorial}, working through the derivation from covariance matrices to eigenvalues and eigenvectors, and relating the algebra to geometric intuition about variance and projections.
+  \item Studied the theory behind SVMs from Jakkula's notes \cite{jakkula2011svm}, focusing on maximum-margin hyperplanes, soft-margin formulations, and Structural Risk Minimization, and connected these ideas to why SVMs tend to perform well in high-dimensional TF--IDF spaces.
+  \item Used StatQuest videos on PCA and SVM \cite{starmer2017pca,starmer2018svm1,starmer2018svm2,starmer2018svm3} to cross-check the formal derivations with a more intuitive explanation of the data, this will be useful later for interpreting the analysis steps and results. 
+  \item Refined the central research question based on this theory: rather than assuming PCA always helps, treat it as a trade-off between noise reduction and information loss, measurable through accuracy, F1, and computation time.
+  \item Prepared our testing methodology - we will compare raw SVM test accuracy against several different component counts for PCA, allowing us to see the direct benefits of PCA compared to pure SVM. (The sweep experiment)
+\end{itemize}
+
+\subsection*{Week 4: Experiment Design, Results, and Interpretation}
+\begin{itemize}
+  \item Designed the PCA/SVM sweep experiment to systematically vary the number of principal components and log the accuracy, F1 score, variance captured, and total runtime for each configuration, using the IMDB dataset as the application domain \cite{maas2011imdb}.
+  \item Implemented the sweep and summary plots so that the baseline SVM (no PCA) appears as a reference line and as a dedicated row in the summary table, with PCA runs reported alongside it at different dimensionalities. This allows us to see for what component sizes PCA improves accuracy, and what component size gives us the highest level of accuracy for the test data.
+  \item Observed empirically that moderate PCA dimensionalities (around 1000 components) slightly outperform the baseline SVM in both accuracy and F1 while using far fewer dimensions, whereas very small or very large numbers of components either under-fit or add unnecessary computation time.
+  \item Interpreted these findings in light of the theory: PCA can improve SVM performance on high-dimensional text data when it removes noisy or redundant directions while preserving the most discriminative structures. However, these results do not guarantee improvements for all types of data, the ideal component size is largely dependent on the type of data we are training on.
+\end{itemize}
+
+\medskip
+
+\noindent All code, experiments, and plots are tracked in the accompanying Python project and \texttt{results/} directory.  Which can be found in my public Github repository \cite{kaila2026svmsemantic}
+
+\medskip
+\newpage
+\bibliographystyle{splncs04}
+\bibliography{references}
+
+\end{document}
+

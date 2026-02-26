@@ -35,8 +35,7 @@ For full context, research questions, and bibliography, see **[docs/](docs/)** (
 2. **Create and activate a virtual environment** (recommended):
    ```bash
    python -m venv .venv
-   .venv\Scripts\activate   # Windows
-   # source .venv/bin/activate   # macOS/Linux
+   source .venv/bin/activate   # macOS/Linux
    ```
 
 3. **Install dependencies:**
@@ -53,6 +52,7 @@ For full context, research questions, and bibliography, see **[docs/](docs/)** (
 All steps (data load, TF-IDF, baseline SVM, PCA analysis, component sweep, and all plots) are run from a single entry point:
 
 ```bash
+source .venv/bin/activate  # if not already in venv
 python main.py
 ```
 

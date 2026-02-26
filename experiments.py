@@ -252,16 +252,25 @@ def plot_summary_table(
 ):
     """
     Render a formatted summary table as an image (good for reports).
+    Adds a final row summarizing the best PCA configuration relative to baseline.
     """
     # Build table data
+    baseline_acc = baseline["metrics"]["accuracy"]
+    baseline_f1 = baseline["metrics"]["f1"]
+
     rows = []
     rows.append({
         "Config": f"Baseline ({baseline['n_features']} feat.)",
-        "Accuracy": f"{baseline['metrics']['accuracy']:.4f}",
-        "F1": f"{baseline['metrics']['f1']:.4f}",
+        "Accuracy": f"{baseline_acc:.4f}",
+        "F1": f"{baseline_f1:.4f}",
         "Variance": "100%",
         "Total Time (s)": f"{baseline['train_time']:.2f}",
     })
+
+    # PCA configurations
+    best_idx = sweep_df["accuracy"].idxmax()
+    best_row = sweep_df.loc[best_idx]
+
     for _, row in sweep_df.iterrows():
         rows.append({
             "Config": f"PCA-{int(row['n_components'])}",
@@ -270,6 +279,15 @@ def plot_summary_table(
             "Variance": f"{row['variance_captured']:.2%}",
             "Total Time (s)": f"{row['total_time']:.2f}",
         })
+
+    # Summary row: highlight best PCA vs baseline (shows improvement over baseline)
+    rows.append({
+        "Config": f"Best PCA-{int(best_row['n_components'])} vs Baseline",
+        "Accuracy": f"{best_row['accuracy']:.4f} (Δ {best_row['accuracy'] - baseline_acc:+.4f})",
+        "F1": f"{best_row['f1']:.4f} (Δ {best_row['f1'] - baseline_f1:+.4f})",
+        "Variance": f"{best_row['variance_captured']:.2%}",
+        "Total Time (s)": f"{best_row['total_time']:.2f}",
+    })
 
     table_df = pd.DataFrame(rows)
 
