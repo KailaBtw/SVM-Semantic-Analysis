@@ -1,0 +1,22 @@
+%% Elevator pitch for PCA + SVM IMDB project
+\documentclass[runningheads]{llncs}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+
+\begin{document}
+
+\title{Elevator Pitch: PCA and SVM for IMDB Sentiment Analysis}
+\author{Ellie Lagrave}
+\institute{Department of Mathematics and Statistics, University of North Carolina Asheville}
+\maketitle
+
+As a long-standing movie review company, we have years of user-submitted reviews. We've traditionally relied on star ratings, but that approach has limitations. When people leave a review they aren't required to rate, and even when they do, that often doesn't represent what they actually wrote. We've all seen comments like ``This movie is my guilty pleasure''... 2 stars. Some movies you just love to hate.
+
+Stars also only give us five possible values; five modes that don't capture the full range of how people feel about a movie. Sentiment analysis lets us extract a percentage score from the review text itself, giving us much finer detail. We can use that to show users an ``emotion'' indicator alongside stars and aggregate emotional response across all reviews.
+
+You know that section at the top of Amazon reviews that summarizes the reviews and breaks down what people liked or didn't? We can use this data to build something similar for movies. Imagine a box at the top of a movie's page showing ``Overwhelmingly positive (2,400 reviews)'' with a quick breakdown: viewers loved the performances, found the pacing slow, but thought the ending landed. Users get a snapshot before scrolling through individual reviews, and we get a way to surface patterns across thousands of comments that no one would read individually. The star average says 3.8; but this system tells you \emph{why} it's a 3.8.
+
+\end{document}
